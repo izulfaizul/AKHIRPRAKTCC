@@ -1,4 +1,4 @@
-const { createUserSchema, loginUserSchema } = require("./Schema");
+const { createUserSchema, loginUserSchema } = require("./schema");
 
 function validateCreateUserSchema(payload) {
     const validateResult = createUserSchema.validate(payload);
