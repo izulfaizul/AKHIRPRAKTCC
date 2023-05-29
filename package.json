@@ -7,12 +7,12 @@
     "start-dev": "nodemon ./bin/wwww"
   },
   "dependencies": {
+    "@google-cloud/storage": "^6.10.1",
     "aes-js": "^3.1.2",
+    "bcrypt": "^5.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "@google-cloud/storage": "^6.10.1",
-    "http-errors": "~1.6.3",
     "image-to-base64": "^2.2.0",
     "jade": "~1.11.0",
     "joi": "^17.7.0",

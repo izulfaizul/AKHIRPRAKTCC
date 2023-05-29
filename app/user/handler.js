@@ -1,4 +1,4 @@
-const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 const {
   validateCreateUserSchema,
   validateLoginUserSchema,
@@ -20,8 +20,7 @@ module.exports = {
       if (checkEmail) {
         throw new Error("Email address has already in use");
       }
-      const hash = crypto.createHash("md5");
-      const hashPassword = hash.update(password, "utf-8").digest("hex");
+      const hashPassword = await bcrypt.hash(password, 10);
       const user = await User.create({
         email,
         fullName,
@@ -49,11 +48,14 @@ module.exports = {
       if (!user) {
         throw new Error("User not found");
       }
-      const hash = crypto.createHash("md5");
-      const hashPassword = hash.update(password, "utf-8").digest("hex");
-      if (hashPassword != user.password) {
+      const passwordValidate = await bcrypt.compareSync(
+        password,
+        user.password
+      );
+      if (!passwordValidate) {
         throw new Error("Invalid password");
       }
+      
       const accessToken = generateAccessToken({
         id: user.id,
         email: user.email,
